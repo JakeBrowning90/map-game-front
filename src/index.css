@@ -66,3 +66,8 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* My placeholder styling */
+footer {
+  background-color: rgb(82, 82, 82);
+}
