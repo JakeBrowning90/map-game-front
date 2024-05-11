@@ -2,14 +2,21 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
-import Footer from "./Footer";
+import StartScreen from "./components/StartScreen";
+import GameScreen from "./components/GameScreen";
+import ScoreScreen from "./components/ScoreScreen";
+import Footer from "./components/Footer";
 
 function App() {
   // const [count, setCount] = useState(0);
 
   return (
     <>
-      <h1>Hello, World!</h1>
+      <main>
+        <StartScreen />
+        <GameScreen />
+        <ScoreScreen />
+      </main>
       <Footer />
       {/* <div>
         <a href="https://vitejs.dev" target="_blank">

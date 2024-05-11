@@ -68,6 +68,19 @@ button:focus-visible {
 }
 
 /* My placeholder styling */
+main {
+  background-color: rgb(82, 82, 82);
+}
+
+.startScreen {
+  background-color: rgba(255, 0, 0, 0.353);
+}
+.gameScreen {
+  background-color: rgba(0, 255, 85, 0.353);
+}
+.scoreScreen {
+  background-color: rgba(8, 0, 255, 0.353);
+}
 footer {
   background-color: rgb(82, 82, 82);
 }
