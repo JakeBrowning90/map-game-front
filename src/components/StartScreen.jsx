@@ -1,9 +1,9 @@
-function StartScreen() {
+function StartScreen({ startGame, viewScoreboard }) {
   return (
     <div className="startScreen">
       <h1>Start Screen</h1>
-      <button>Start Game</button>
-      <button>High Scores</button>
+      <button onClick={startGame}>Start Game</button>
+      <button onClick={viewScoreboard}>High Scores</button>
     </div>
   );
 }

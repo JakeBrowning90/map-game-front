@@ -72,15 +72,30 @@ main {
   background-color: rgb(82, 82, 82);
 }
 
+
 .startScreen {
   background-color: rgba(255, 0, 0, 0.353);
+  display: flex;
+  flex-direction: column;
 }
 .gameScreen {
   background-color: rgba(0, 255, 85, 0.353);
+  display: none;
 }
 .scoreScreen {
   background-color: rgba(8, 0, 255, 0.353);
+  display: none;
 }
+
 footer {
   background-color: rgb(82, 82, 82);
+}
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: flex;
+  flex-direction: column;
 }
