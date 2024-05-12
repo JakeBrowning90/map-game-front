@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -44,13 +44,23 @@ const returnHome = () => {
 
 function App() {
   // const [count, setCount] = useState(0);
+  const [userData, setUserData] = useState([]);
+
+  useEffect(() => {
+    const getUsers = async () => {
+      let response = await fetch("http://localhost:3000/users");
+      let data = await response.json();
+      setUserData(data);
+    };
+    getUsers();
+  }, []);
 
   return (
     <>
       <main>
         <StartScreen viewScoreboard={viewScoreboard} startGame={startGame} />
         <GameScreen abortGame={abortGame} />
-        <ScoreScreen returnHome={returnHome} />
+        <ScoreScreen returnHome={returnHome} userData={userData}/>
       </main>
       <Footer />
       {/* <div>

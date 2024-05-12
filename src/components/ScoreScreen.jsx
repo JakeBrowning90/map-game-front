@@ -1,19 +1,12 @@
-function ScoreScreen({ returnHome }) {
-
-  // Test Array, change to fetch
-  const players = [
-    { name: "Ann", score: 12000 },
-    { name: "Ben", score: 11000 },
-    { name: "Cal", score: 10000 },
-  ];
+function ScoreScreen({ returnHome, userData }) {
 
   return (
     <div className="scoreScreen">
       <h1>Score Screen</h1>
 
       <ol>
-      {players.map((player) => {
-        return <li key={player}>{player.name}: {player.score}</li>
+      {userData.map((user) => {
+        return <li key={user}>{user.name}: {user.score}</li>
       })}
       </ol>
 
