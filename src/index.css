@@ -84,12 +84,15 @@ main {
 
 .gameBoard {
   box-sizing: border-box;
-  height: 500px;
-  width: 500px;
-  background-color: rgb(223, 223, 223);
+  height: 400px;
+  width: 600px;
+  /* background-color: rgb(223, 223, 223); */
+  background-image: url('./assets/whereswaldoFruit.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
   display: grid;
-  grid-template-rows: repeat(10, 1fr);
-  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(8, 1fr);
 }
 
 .gameTile {

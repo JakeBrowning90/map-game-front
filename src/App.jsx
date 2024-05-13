@@ -10,54 +10,67 @@ import Footer from "./components/Footer";
 function App() {
   // const [count, setCount] = useState(0);
   const [userData, setUserData] = useState([]);
+  const [targetData, setTargetData] = useState([]);
   const [tileSet, setTileSet] = useState([]);
 
   const toggleHome = () => {
     let startScreen = document.querySelector(".startScreen");
     startScreen.classList.toggle("hidden");
   };
-  
+
   const toggleScore = () => {
     let scoreScreen = document.querySelector(".scoreScreen");
     scoreScreen.classList.toggle("visible");
   };
-  
+
   const toggleGame = () => {
     let gameScreen = document.querySelector(".gameScreen");
     gameScreen.classList.toggle("visible");
   };
-  
+
   const startGame = () => {
     toggleHome();
     toggleGame();
     drawTileSet();
   };
-  
+
   const abortGame = () => {
     toggleGame();
     toggleHome();
   };
-  
+
   const viewScoreboard = () => {
     toggleHome();
     toggleScore();
   };
-  
+
   const returnHome = () => {
     toggleHome();
     toggleScore();
   };
 
   const drawTileSet = () => {
-    setTileSet(tileSet => [])
-    for (let i = 0; i < 10; i++) {
-      for(let j = 0; j < 10; j++){
-        setTileSet((tileSet) => [...tileSet, {key: `${i},${j}`}])
+    setTileSet((tileSet) => []);
+    // Y axis (rows)
+    for (let i = 0; i < 4; i++) {
+      // X axis (columns)
+      for (let j = 0; j < 8; j++) {
+        setTileSet((tileSet) => [...tileSet, { key: `${j},${i}` }]);
       }
     }
-  }
+  };
 
-  
+  const clickTile = (e) => {
+    console.log(e.target.id);
+    let target = targetData.find((object) =>
+      object.location.includes(e.target.id)
+    );
+    if (target == undefined) {
+      console.log("No target");
+    } else {
+      console.log(target.name);
+    }
+  };
 
   useEffect(() => {
     const getUsers = async () => {
@@ -67,12 +80,25 @@ function App() {
     };
     getUsers();
   }, []);
- 
+
+  useEffect(() => {
+    const getTargets = async () => {
+      let response = await fetch("http://localhost:3000/targets");
+      let data = await response.json();
+      setTargetData(data);
+    };
+    getTargets();
+  }, []);
+
   return (
     <>
       <main>
         <StartScreen viewScoreboard={viewScoreboard} startGame={startGame} />
-        <GameScreen abortGame={abortGame} tileSet ={tileSet}/>
+        <GameScreen
+          abortGame={abortGame}
+          tileSet={tileSet}
+          clickTile={clickTile}
+        />
         <ScoreScreen returnHome={returnHome} userData={userData} />
       </main>
       <Footer />

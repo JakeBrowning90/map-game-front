@@ -6,7 +6,7 @@ function ScoreScreen({ returnHome, userData }) {
 
       <ol>
       {userData.map((user) => {
-        return <li key={user}>{user.name}: {user.score}</li>
+        return <li key={user.id}>{user.name}: {user.score}</li>
       })}
       </ol>
 
