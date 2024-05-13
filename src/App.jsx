@@ -60,17 +60,17 @@ function App() {
     }
   };
 
-  const clickTile = (e) => {
-    console.log(e.target.id);
-    let target = targetData.find((object) =>
-      object.location.includes(e.target.id)
-    );
-    if (target == undefined) {
-      console.log("No target");
-    } else {
-      console.log(target.name);
-    }
-  };
+  // const clickTile = (e) => {
+  //   console.log(e.target.id);
+  //   let target = targetData.find((object) =>
+  //     object.location.includes(e.target.id)
+  //   );
+  //   if (target == undefined) {
+  //     console.log("No target");
+  //   } else {
+  //     console.log(target.name);
+  //   }
+  // };
 
   useEffect(() => {
     const getUsers = async () => {
@@ -96,8 +96,9 @@ function App() {
         <StartScreen viewScoreboard={viewScoreboard} startGame={startGame} />
         <GameScreen
           abortGame={abortGame}
+          targetData = {targetData}
           tileSet={tileSet}
-          clickTile={clickTile}
+          // clickTile={clickTile}
         />
         <ScoreScreen returnHome={returnHome} userData={userData} />
       </main>

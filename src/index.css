@@ -82,6 +82,10 @@ main {
   display: none;
 }
 
+.targetNamer {
+  background-color: greenyellow;
+}
+
 .gameBoard {
   box-sizing: border-box;
   height: 400px;
@@ -96,7 +100,7 @@ main {
 }
 
 .gameTile {
-  border: 1px solid grey;
+  border: 1px solid rgba(128, 128, 128, 0.507);
   color: black;
 }
 
