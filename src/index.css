@@ -81,6 +81,22 @@ main {
   background-color: rgba(0, 255, 85, 0.353);
   display: none;
 }
+
+.gameBoard {
+  box-sizing: border-box;
+  height: 500px;
+  width: 500px;
+  background-color: rgb(223, 223, 223);
+  display: grid;
+  grid-template-rows: repeat(10, 1fr);
+  grid-template-columns: repeat(10, 1fr);
+}
+
+.gameTile {
+  border: 1px solid grey;
+  color: black;
+}
+
 .scoreScreen {
   background-color: rgba(8, 0, 255, 0.353);
   display: none;

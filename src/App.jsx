@@ -7,44 +7,57 @@ import GameScreen from "./components/GameScreen";
 import ScoreScreen from "./components/ScoreScreen";
 import Footer from "./components/Footer";
 
-const toggleHome = () => {
-  let startScreen = document.querySelector(".startScreen");
-  startScreen.classList.toggle("hidden");
-};
-
-const toggleScore = () => {
-  let scoreScreen = document.querySelector(".scoreScreen");
-  scoreScreen.classList.toggle("visible");
-};
-
-const toggleGame = () => {
-  let gameScreen = document.querySelector(".gameScreen");
-  gameScreen.classList.toggle("visible");
-};
-
-const startGame = () => {
-  toggleHome();
-  toggleGame();
-};
-
-const abortGame = () => {
-  toggleGame();
-  toggleHome();
-};
-
-const viewScoreboard = () => {
-  toggleHome();
-  toggleScore();
-};
-
-const returnHome = () => {
-  toggleHome();
-  toggleScore();
-};
-
 function App() {
   // const [count, setCount] = useState(0);
   const [userData, setUserData] = useState([]);
+  const [tileSet, setTileSet] = useState([]);
+
+  const toggleHome = () => {
+    let startScreen = document.querySelector(".startScreen");
+    startScreen.classList.toggle("hidden");
+  };
+  
+  const toggleScore = () => {
+    let scoreScreen = document.querySelector(".scoreScreen");
+    scoreScreen.classList.toggle("visible");
+  };
+  
+  const toggleGame = () => {
+    let gameScreen = document.querySelector(".gameScreen");
+    gameScreen.classList.toggle("visible");
+  };
+  
+  const startGame = () => {
+    toggleHome();
+    toggleGame();
+    drawTileSet();
+  };
+  
+  const abortGame = () => {
+    toggleGame();
+    toggleHome();
+  };
+  
+  const viewScoreboard = () => {
+    toggleHome();
+    toggleScore();
+  };
+  
+  const returnHome = () => {
+    toggleHome();
+    toggleScore();
+  };
+
+  const drawTileSet = () => {
+    setTileSet(tileSet => [])
+    for (let i = 0; i < 10; i++) {
+      for(let j = 0; j < 10; j++){
+        setTileSet((tileSet) => [...tileSet, {key: `${i},${j}`}])
+      }
+    }
+  }
+
+  
 
   useEffect(() => {
     const getUsers = async () => {
@@ -54,13 +67,13 @@ function App() {
     };
     getUsers();
   }, []);
-
+ 
   return (
     <>
       <main>
         <StartScreen viewScoreboard={viewScoreboard} startGame={startGame} />
-        <GameScreen abortGame={abortGame} />
-        <ScoreScreen returnHome={returnHome} userData={userData}/>
+        <GameScreen abortGame={abortGame} tileSet ={tileSet}/>
+        <ScoreScreen returnHome={returnHome} userData={userData} />
       </main>
       <Footer />
       {/* <div>
