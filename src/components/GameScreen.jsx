@@ -15,12 +15,15 @@ function GameScreen({ abortGame, targetData, tileSet }) {
     } else {
       console.log(target.name);
     }
+    // If currentTile is already present, remove marker, set current tile to undefined, hide targetnamer
+    // If no currentTile, add marker, set current tile, shoe targetNamer
+
   };
 
   function checkMove(){
     console.log(currentTile)
 
-    
+
   }
 
   return (
