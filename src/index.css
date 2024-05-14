@@ -82,8 +82,9 @@ main {
   display: none;
 }
 
-.targetNamer {
+.gameScreenControls {
   background-color: greenyellow;
+  display: none;
 }
 
 .gameBoard {
@@ -91,7 +92,7 @@ main {
   height: 400px;
   width: 600px;
   /* background-color: rgb(223, 223, 223); */
-  background-image: url('./assets/whereswaldoFruit.jpeg');
+  background-image: url("./assets/whereswaldoFruit.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
   display: grid;
@@ -102,6 +103,21 @@ main {
 .gameTile {
   border: 1px solid rgba(128, 128, 128, 0.507);
   color: black;
+  z-index: 0;
+}
+
+.gameTile:hover {
+  background-color: rgba(0, 242, 255, 0.37);
+}
+
+#targetMarker {
+  height: 100%;
+  box-sizing: border-box;
+
+  border: 5px solid #fffb00;
+  margin-top: -24px;
+  z-index: 1;
+  /* position: absolute; */
 }
 
 .scoreScreen {

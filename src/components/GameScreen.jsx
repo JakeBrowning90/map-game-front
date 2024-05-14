@@ -1,46 +1,68 @@
 import { useEffect, useState } from "react";
 
 function GameScreen({ abortGame, targetData, tileSet }) {
-
   const [currentTile, setCurrentTile] = useState();
 
   const clickTile = (e) => {
-    console.log(e.target.id);
-    setCurrentTile(e.target.id)
-    let target = targetData.find((object) =>
-      object.location.includes(e.target.id)
-    );
-    if (target == undefined) {
-      console.log("No target");
+    if (!currentTile) {
+      setCurrentTile(e.target.id);
+      addMarker(e.target);
+      toggleTargetList();
     } else {
-      console.log(target.name);
+      setCurrentTile(undefined);
+      removeMarker();
+      toggleTargetList();
     }
-    // If currentTile is already present, remove marker, set current tile to undefined, hide targetnamer
-    // If no currentTile, add marker, set current tile, shoe targetNamer
-
+    // console.log(currentTile);
   };
 
-  function checkMove(){
-    console.log(currentTile)
+  const addMarker = (tile) => {
+    const targetMarker = document.createElement("div");
+    targetMarker.setAttribute("id", "targetMarker");
+    tile.appendChild(targetMarker);
+  };
 
+  const removeMarker = () => {
+    const targetMarker = document.querySelector("#targetMarker");
+    targetMarker.remove();
+  };
 
+  const toggleTargetList = () => {
+    const targetNamer = document.querySelector(".gameScreenControls");
+    targetNamer.classList.toggle("visible");
+  };
+
+  function checkMove() {
+    // console.log(currentTile);
+    const targetNamer = document.querySelector("#targetNamer");
+    let namedTarget = targetNamer.value;
+    // console.log(targetData);
+    let target = targetData.find(({ name }) => name === namedTarget);
+    // console.log(target);
+    if (target.location.includes(currentTile)) {
+      console.log(`Correct! ${namedTarget} is at ${currentTile}`);
+    } else {
+      console.log(`Sorry, ${namedTarget} is NOT at ${currentTile}`);
+    }
   }
 
   return (
     <div className="gameScreen">
       <h1>Game Screen</h1>
 
-      <div className="targetNamer">
-        <select name="targetNamer" id="targetNamer">
-          {targetData.map((target) => {
-            return (
-              <option className="gameTile" key={target.key} id={target.key}>
-                {target.name}
-              </option>
-            );
-          })}
-        </select>
-        <button onClick={checkMove}>Check</button>
+      <div className="gameScreenControls">
+        <div>
+          <select name="targetNamer" id="targetNamer">
+            {targetData.map((target) => {
+              return (
+                <option key={target.key} id={target.key}>
+                  {target.name}
+                </option>
+              );
+            })}
+          </select>
+          <button onClick={checkMove}>Check</button>
+        </div>
       </div>
 
       <div className="gameBoard">
