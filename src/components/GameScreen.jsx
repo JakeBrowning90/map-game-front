@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 
-function GameScreen({ abortGame, targetData, tileSet }) {
+function GameScreen({ abortGame, targetData, setTargetData, tileSet }) {
   const [currentTile, setCurrentTile] = useState();
 
   const clickTile = (e) => {
     if (!currentTile) {
       setCurrentTile(e.target.id);
       addMarker(e.target);
-      toggleTargetList();
+      toggleTargetForm();
+      updateBannerText("What is this?");
     } else {
-      setCurrentTile(undefined);
-      removeMarker();
-      toggleTargetList();
+      resetBoard();
+      updateBannerText();
     }
     // console.log(currentTile);
   };
@@ -27,22 +27,54 @@ function GameScreen({ abortGame, targetData, tileSet }) {
     targetMarker.remove();
   };
 
-  const toggleTargetList = () => {
-    const targetNamer = document.querySelector(".gameScreenControls");
-    targetNamer.classList.toggle("visible");
+  const addCheckmark = () => {
+    const correctTile = document.getElementById(`${currentTile}`);
+    const checkmark = document.createElement("div");
+    checkmark.setAttribute("class", "checkmark");
+    correctTile.appendChild(checkmark);
+  };
+
+  const toggleTargetForm = () => {
+    const targetForm = document.querySelector(".targetForm");
+    targetForm.classList.toggle("visible");
+  };
+
+  const resetBoard = () => {
+    setCurrentTile(undefined);
+    removeMarker();
+    toggleTargetForm();
+  };
+
+  const updateBannerText = (string) => {
+    const banner = document.querySelector(".banner");
+    if (string == undefined) {
+      banner.textContent = "Click on a target in the image.";
+    } else {
+      banner.textContent = string;
+    }
+  };
+
+  const removeFoundTarget = (found) => {
+    setTargetData(targetData.filter((target) => target.id) !== found);
+    console.log(targetData)
   };
 
   function checkMove() {
-    // console.log(currentTile);
     const targetNamer = document.querySelector("#targetNamer");
     let namedTarget = targetNamer.value;
-    // console.log(targetData);
     let target = targetData.find(({ name }) => name === namedTarget);
-    // console.log(target);
+    console.log(target);
     if (target.location.includes(currentTile)) {
-      console.log(`Correct! ${namedTarget} is at ${currentTile}`);
+      updateBannerText(`Correct! ${namedTarget} is at ${currentTile}`);
+      addCheckmark();
+      resetBoard();
+      // TODO: Update score/list display
+      // TODO: Remove target from list
+      removeFoundTarget(target.id)
+      // TODO: Check for endgame
     } else {
-      console.log(`Sorry, ${namedTarget} is NOT at ${currentTile}`);
+      updateBannerText(`Sorry, ${namedTarget} is NOT at ${currentTile}`);
+      resetBoard();
     }
   }
 
@@ -51,7 +83,8 @@ function GameScreen({ abortGame, targetData, tileSet }) {
       <h1>Game Screen</h1>
 
       <div className="gameScreenControls">
-        <div>
+        <p className="banner">Click on a target in the image.</p>
+        <div className="targetForm">
           <select name="targetNamer" id="targetNamer">
             {targetData.map((target) => {
               return (

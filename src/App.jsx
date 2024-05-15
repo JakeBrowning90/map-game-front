@@ -85,6 +85,7 @@ function App() {
     const getTargets = async () => {
       let response = await fetch("http://localhost:3000/targets");
       let data = await response.json();
+      // TODO: add a found boolean?
       setTargetData(data);
     };
     getTargets();
@@ -96,7 +97,8 @@ function App() {
         <StartScreen viewScoreboard={viewScoreboard} startGame={startGame} />
         <GameScreen
           abortGame={abortGame}
-          targetData = {targetData}
+          targetData={targetData}
+          setTargetData={setTargetData}
           tileSet={tileSet}
           // clickTile={clickTile}
         />

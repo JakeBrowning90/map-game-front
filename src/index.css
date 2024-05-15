@@ -83,7 +83,18 @@ main {
 }
 
 .gameScreenControls {
+  color: black;
   background-color: greenyellow;
+  height: 100px;
+}
+.banner {
+  padding: 0;
+  margin: 0;
+}
+
+.targetForm {
+  background-color: rgb(213, 255, 47);
+  padding: 10px;
   display: none;
 }
 
@@ -113,11 +124,17 @@ main {
 #targetMarker {
   height: 100%;
   box-sizing: border-box;
-
   border: 5px solid #fffb00;
   margin-top: -24px;
   z-index: 1;
-  /* position: absolute; */
+}
+
+.checkmark {
+  height: 100%;
+  box-sizing: border-box;
+  border: 5px solid #ff0000;
+  margin-top: -24px;
+  z-index: 2;
 }
 
 .scoreScreen {
