@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import TargetNamer from "./TargetNamer";
 
-function GameScreen({ abortGame, targetData, setTargetData, tileSet }) {
+function GameScreen({ abortGame, tileSet }) {
   const [currentTile, setCurrentTile] = useState();
+  const [targetData, setTargetData] = useState([]);
 
   const clickTile = (e) => {
     if (!currentTile) {
@@ -55,28 +57,39 @@ function GameScreen({ abortGame, targetData, setTargetData, tileSet }) {
   };
 
   const removeFoundTarget = (found) => {
-    setTargetData(targetData.filter((target) => target.id) !== found);
-    console.log(targetData)
+    setTargetData(targetData.filter((target) => target.id !== found.id));
   };
+
+  const checkEndgame = () => {};
 
   function checkMove() {
     const targetNamer = document.querySelector("#targetNamer");
     let namedTarget = targetNamer.value;
     let target = targetData.find(({ name }) => name === namedTarget);
-    console.log(target);
+    // console.log(target);
     if (target.location.includes(currentTile)) {
       updateBannerText(`Correct! ${namedTarget} is at ${currentTile}`);
       addCheckmark();
       resetBoard();
       // TODO: Update score/list display
       // TODO: Remove target from list
-      removeFoundTarget(target.id)
+      removeFoundTarget(target);
       // TODO: Check for endgame
     } else {
       updateBannerText(`Sorry, ${namedTarget} is NOT at ${currentTile}`);
       resetBoard();
     }
   }
+
+  useEffect(() => {
+    const getTargets = async () => {
+      let response = await fetch("http://localhost:3000/targets");
+      let data = await response.json();
+      // TODO: add a found boolean?
+      setTargetData(data);
+    };
+    getTargets();
+  }, []);
 
   return (
     <div className="gameScreen">
@@ -85,15 +98,16 @@ function GameScreen({ abortGame, targetData, setTargetData, tileSet }) {
       <div className="gameScreenControls">
         <p className="banner">Click on a target in the image.</p>
         <div className="targetForm">
-          <select name="targetNamer" id="targetNamer">
+          <TargetNamer targetData={targetData} />
+          {/* <select name="targetNamer" id="targetNamer">
             {targetData.map((target) => {
               return (
-                <option key={target.key} id={target.key}>
+                <option key={target.id} id={target.key}>
                   {target.name}
                 </option>
               );
             })}
-          </select>
+          </select> */}
           <button onClick={checkMove}>Check</button>
         </div>
       </div>

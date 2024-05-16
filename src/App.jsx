@@ -6,11 +6,12 @@ import StartScreen from "./components/StartScreen";
 import GameScreen from "./components/GameScreen";
 import ScoreScreen from "./components/ScoreScreen";
 import Footer from "./components/Footer";
+// import TargetNamer from ".components/TargetNamer"
 
 function App() {
   // const [count, setCount] = useState(0);
   const [userData, setUserData] = useState([]);
-  const [targetData, setTargetData] = useState([]);
+  // const [targetData, setTargetData] = useState([]);
   const [tileSet, setTileSet] = useState([]);
 
   const toggleHome = () => {
@@ -60,18 +61,6 @@ function App() {
     }
   };
 
-  // const clickTile = (e) => {
-  //   console.log(e.target.id);
-  //   let target = targetData.find((object) =>
-  //     object.location.includes(e.target.id)
-  //   );
-  //   if (target == undefined) {
-  //     console.log("No target");
-  //   } else {
-  //     console.log(target.name);
-  //   }
-  // };
-
   useEffect(() => {
     const getUsers = async () => {
       let response = await fetch("http://localhost:3000/users");
@@ -81,15 +70,15 @@ function App() {
     getUsers();
   }, []);
 
-  useEffect(() => {
-    const getTargets = async () => {
-      let response = await fetch("http://localhost:3000/targets");
-      let data = await response.json();
-      // TODO: add a found boolean?
-      setTargetData(data);
-    };
-    getTargets();
-  }, []);
+  // useEffect(() => {
+  //   const getTargets = async () => {
+  //     let response = await fetch("http://localhost:3000/targets");
+  //     let data = await response.json();
+  //     // TODO: add a found boolean?
+  //     setTargetData(data);
+  //   };
+  //   getTargets();
+  // }, []);
 
   return (
     <>
@@ -97,8 +86,8 @@ function App() {
         <StartScreen viewScoreboard={viewScoreboard} startGame={startGame} />
         <GameScreen
           abortGame={abortGame}
-          targetData={targetData}
-          setTargetData={setTargetData}
+          // targetData={targetData}
+          // setTargetData={setTargetData}
           tileSet={tileSet}
           // clickTile={clickTile}
         />
