@@ -57,22 +57,22 @@ function GameScreen({ abortGame, tileSet }) {
   };
 
   const removeFoundTarget = (found) => {
-    let oldTargets = [...targetData];
-    let remainingTargets = oldTargets.filter(
-      (target) => target.id !== found.id
-    );
-    setTargetData(remainingTargets);
-
-    // setTargetData(targetData.filter((target) => target.id !== found.id));
+    setTargetData(targetData.filter((target) => target.id !== found.id));
   };
 
   const checkEndgame = () => {
-    if (targetData.length == 0) {
+    if (targetData.length == 1) {
       return true;
     } else {
       return false;
     }
   };
+
+  // useEffect(() => {
+  //   if (targetData.length == 0) {
+  //     alert("Finished!");
+  //   }
+  // }, [targetData]);
 
   function checkMove() {
     const targetNamer = document.querySelector("#targetNamer");
@@ -80,17 +80,18 @@ function GameScreen({ abortGame, tileSet }) {
     let target = targetData.find(({ name }) => name === namedTarget);
     // console.log(target);
     if (target.location.includes(currentTile)) {
+
       updateBannerText(`Correct! ${namedTarget} is at ${currentTile}`);
       addCheckmark();
       resetBoard();
       // TODO: Update score/list display
       // TODO: Remove target from list
-      removeFoundTarget(target);
-       // TODO: Check for endgame
-       if (checkEndgame()) {
-        console.log("Game over!");
-        // TODO: Check completion time, prompt player name
+      if (checkEndgame()) {
+        alert("Finished!")
       }
+
+      removeFoundTarget(target);
+      // TODO: Check for endgame
     } else {
       updateBannerText(`Sorry, ${namedTarget} is NOT at ${currentTile}`);
       resetBoard();
