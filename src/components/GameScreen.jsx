@@ -67,7 +67,7 @@ function GameScreen({ abortGame, tileSet }) {
   };
 
   const checkEndgame = () => {
-    if (targetData.length == 1) {
+    if (targetData.length == 0) {
       return true;
     } else {
       return false;
@@ -80,17 +80,17 @@ function GameScreen({ abortGame, tileSet }) {
     let target = targetData.find(({ name }) => name === namedTarget);
     // console.log(target);
     if (target.location.includes(currentTile)) {
-      // TODO: Check for endgame
-      if (checkEndgame()) {
-        console.log("Game over!");
-        // TODO: Check completion time, prompt player name
-      }
       updateBannerText(`Correct! ${namedTarget} is at ${currentTile}`);
       addCheckmark();
       resetBoard();
       // TODO: Update score/list display
       // TODO: Remove target from list
       removeFoundTarget(target);
+       // TODO: Check for endgame
+       if (checkEndgame()) {
+        console.log("Game over!");
+        // TODO: Check completion time, prompt player name
+      }
     } else {
       updateBannerText(`Sorry, ${namedTarget} is NOT at ${currentTile}`);
       resetBoard();
