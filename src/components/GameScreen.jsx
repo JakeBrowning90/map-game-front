@@ -57,10 +57,22 @@ function GameScreen({ abortGame, tileSet }) {
   };
 
   const removeFoundTarget = (found) => {
-    setTargetData(targetData.filter((target) => target.id !== found.id));
+    let oldTargets = [...targetData];
+    let remainingTargets = oldTargets.filter(
+      (target) => target.id !== found.id
+    );
+    setTargetData(remainingTargets);
+
+    // setTargetData(targetData.filter((target) => target.id !== found.id));
   };
 
-  const checkEndgame = () => {};
+  const checkEndgame = () => {
+    if (targetData.length == 1) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   function checkMove() {
     const targetNamer = document.querySelector("#targetNamer");
@@ -68,13 +80,17 @@ function GameScreen({ abortGame, tileSet }) {
     let target = targetData.find(({ name }) => name === namedTarget);
     // console.log(target);
     if (target.location.includes(currentTile)) {
+      // TODO: Check for endgame
+      if (checkEndgame()) {
+        console.log("Game over!");
+        // TODO: Check completion time, prompt player name
+      }
       updateBannerText(`Correct! ${namedTarget} is at ${currentTile}`);
       addCheckmark();
       resetBoard();
       // TODO: Update score/list display
       // TODO: Remove target from list
       removeFoundTarget(target);
-      // TODO: Check for endgame
     } else {
       updateBannerText(`Sorry, ${namedTarget} is NOT at ${currentTile}`);
       resetBoard();
@@ -99,15 +115,6 @@ function GameScreen({ abortGame, tileSet }) {
         <p className="banner">Click on a target in the image.</p>
         <div className="targetForm">
           <TargetNamer targetData={targetData} />
-          {/* <select name="targetNamer" id="targetNamer">
-            {targetData.map((target) => {
-              return (
-                <option key={target.id} id={target.key}>
-                  {target.name}
-                </option>
-              );
-            })}
-          </select> */}
           <button onClick={checkMove}>Check</button>
         </div>
       </div>

@@ -36,6 +36,7 @@ function App() {
   };
 
   const abortGame = () => {
+    // TODO: Reset target list on aborted game
     toggleGame();
     toggleHome();
   };
