@@ -8,7 +8,7 @@ function GameScreen({ abortGame, tileSet }) {
   const clickTile = (e) => {
     if (!currentTile) {
       setCurrentTile(e.target.id);
-      addMarker(e.target);
+      // addMarker(e.target);
       toggleTargetForm();
       updateBannerText("What is this?");
     } else {
@@ -16,17 +16,6 @@ function GameScreen({ abortGame, tileSet }) {
       updateBannerText();
     }
     // console.log(currentTile);
-  };
-
-  const addMarker = (tile) => {
-    const targetMarker = document.createElement("div");
-    targetMarker.setAttribute("id", "targetMarker");
-    tile.appendChild(targetMarker);
-  };
-
-  const removeMarker = () => {
-    const targetMarker = document.querySelector("#targetMarker");
-    targetMarker.remove();
   };
 
   const addCheckmark = () => {
@@ -43,7 +32,7 @@ function GameScreen({ abortGame, tileSet }) {
 
   const resetBoard = () => {
     setCurrentTile(undefined);
-    removeMarker();
+    // removeMarker();
     toggleTargetForm();
   };
 
@@ -119,6 +108,7 @@ function GameScreen({ abortGame, tileSet }) {
               onClick={clickTile}
             >
               {tile.key}
+              {currentTile == tile.key && <div id='targetMarker'></div>}
             </div>
           );
         })}
