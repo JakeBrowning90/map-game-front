@@ -71,27 +71,11 @@ function App() {
     getUsers();
   }, []);
 
-  // useEffect(() => {
-  //   const getTargets = async () => {
-  //     let response = await fetch("http://localhost:3000/targets");
-  //     let data = await response.json();
-  //     // TODO: add a found boolean?
-  //     setTargetData(data);
-  //   };
-  //   getTargets();
-  // }, []);
-
   return (
     <>
       <main>
         <StartScreen viewScoreboard={viewScoreboard} startGame={startGame} />
-        <GameScreen
-          abortGame={abortGame}
-          // targetData={targetData}
-          // setTargetData={setTargetData}
-          tileSet={tileSet}
-          // clickTile={clickTile}
-        />
+        <GameScreen abortGame={abortGame} tileSet={tileSet} />
         <ScoreScreen returnHome={returnHome} userData={userData} />
       </main>
       <Footer />

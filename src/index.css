@@ -95,7 +95,7 @@ main {
 .targetForm {
   background-color: rgb(213, 255, 47);
   padding: 10px;
-  display: none;
+  /* display: none; */
 }
 
 .gameBoard {

@@ -9,25 +9,20 @@ function GameScreen({ abortGame, tileSet }) {
   const clickTile = (e) => {
     if (!currentTile) {
       setCurrentTile(e.target.id);
-      // addMarker(e.target);
-      toggleTargetForm();
-      updateBannerText("What is this?");
+      if (!e.target.id) {
+        updateBannerText("You've already found something here!");
+      } else {
+        updateBannerText("What is this?");
+      }
     } else {
       resetBoard();
       updateBannerText();
     }
-    // console.log(currentTile);
-  };
-
-  const toggleTargetForm = () => {
-    const targetForm = document.querySelector(".targetForm");
-    targetForm.classList.toggle("visible");
   };
 
   const resetBoard = () => {
     setCurrentTile(undefined);
     // removeMarker();
-    toggleTargetForm();
   };
 
   const updateBannerText = (string) => {
@@ -88,10 +83,12 @@ function GameScreen({ abortGame, tileSet }) {
 
       <div className="gameScreenControls">
         <p className="banner">Click on a target in the image.</p>
-        <div className="targetForm">
-          <TargetNamer targetData={targetData} />
-          <button onClick={checkMove}>Check</button>
-        </div>
+        {currentTile && (
+          <div className="targetForm">
+            <TargetNamer targetData={targetData} />
+            <button onClick={checkMove}>Check</button>
+          </div>
+        )}
       </div>
 
       <div className="gameBoard">
@@ -105,7 +102,9 @@ function GameScreen({ abortGame, tileSet }) {
             >
               {tile.key}
               {currentTile == tile.key && <div id="targetMarker"></div>}
-              {foundTiles.includes(tile.key) && <div className='checkmark'></div>}
+              {foundTiles.includes(tile.key) && (
+                <div className="checkmark"></div>
+              )}
             </div>
           );
         })}
