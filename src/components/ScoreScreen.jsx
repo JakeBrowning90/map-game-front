@@ -1,4 +1,4 @@
-function ScoreScreen({ returnHome, userData }) {
+function ScoreScreen({ navToHome, userData }) {
 
   return (
     <div className="scoreScreen">
@@ -10,7 +10,7 @@ function ScoreScreen({ returnHome, userData }) {
       })}
       </ol>
 
-      <button onClick={returnHome}>Return Home</button>
+      <button onClick={navToHome}>Return Home</button>
     </div>
   );
 }

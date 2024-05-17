@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import TargetNamer from "./TargetNamer";
 
-function GameScreen({ abortGame, tileSet }) {
+function GameScreen({ abortGame, navToHome, navToScoreboard, tileSet }) {
   const [currentTile, setCurrentTile] = useState();
   const [targetData, setTargetData] = useState([]);
   const [foundTiles, setFoundTiles] = useState([]);
@@ -59,6 +59,7 @@ function GameScreen({ abortGame, tileSet }) {
       );
       if (checkEndgame(remainingTargets)) {
         alert("Finished!");
+        navToScoreboard();
       }
       setTargetData(remainingTargets);
     } else {
@@ -109,8 +110,8 @@ function GameScreen({ abortGame, tileSet }) {
           );
         })}
       </div>
-
-      <button onClick={abortGame}>Return Home</button>
+      {/* //TODO: add function to clear all game data + navToHome */}
+      <button onClick={navToHome}>Return Home</button>
     </div>
   );
 }

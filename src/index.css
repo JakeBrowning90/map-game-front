@@ -79,7 +79,7 @@ main {
 }
 .gameScreen {
   background-color: rgba(0, 255, 85, 0.353);
-  display: none;
+  /* display: none; */
 }
 
 .gameScreenControls {
@@ -139,7 +139,7 @@ main {
 
 .scoreScreen {
   background-color: rgba(8, 0, 255, 0.353);
-  display: none;
+  /* display: none; */
 }
 
 footer {

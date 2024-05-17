@@ -13,42 +13,32 @@ function App() {
   const [userData, setUserData] = useState([]);
   // const [targetData, setTargetData] = useState([]);
   const [tileSet, setTileSet] = useState([]);
+  const [homeActive, setHomeActive] = useState(true);
+  const [gameActive, setGameActive] = useState(false);
+  const [scoreboardActive, setScoreboardActive] = useState(false);
 
-  const toggleHome = () => {
-    let startScreen = document.querySelector(".startScreen");
-    startScreen.classList.toggle("hidden");
+  const navToHome = () => {
+    setHomeActive(true);
+    setGameActive(false);
+    setScoreboardActive(false);
   };
 
-  const toggleScore = () => {
-    let scoreScreen = document.querySelector(".scoreScreen");
-    scoreScreen.classList.toggle("visible");
+  const navToGame = () => {
+    setHomeActive(false);
+    setGameActive(true);
+    setScoreboardActive(false);
   };
 
-  const toggleGame = () => {
-    let gameScreen = document.querySelector(".gameScreen");
-    gameScreen.classList.toggle("visible");
-  };
-
-  const startGame = () => {
-    toggleHome();
-    toggleGame();
-    drawTileSet();
+  const navToScoreboard = () => {
+    setHomeActive(false);
+    setGameActive(false);
+    setScoreboardActive(true);
   };
 
   const abortGame = () => {
     // TODO: Reset target list on aborted game
-    toggleGame();
-    toggleHome();
-  };
-
-  const viewScoreboard = () => {
-    toggleHome();
-    toggleScore();
-  };
-
-  const returnHome = () => {
-    toggleHome();
-    toggleScore();
+    setGameActive(false);
+    setHomeActive(true);
   };
 
   const drawTileSet = () => {
@@ -74,9 +64,24 @@ function App() {
   return (
     <>
       <main>
-        <StartScreen viewScoreboard={viewScoreboard} startGame={startGame} />
-        <GameScreen abortGame={abortGame} tileSet={tileSet} />
-        <ScoreScreen returnHome={returnHome} userData={userData} />
+        {homeActive && (
+          <StartScreen
+            navToScoreboard={navToScoreboard}
+            navToGame={navToGame}
+            drawTileSet={drawTileSet}
+          />
+        )}
+        {gameActive && (
+          <GameScreen
+            abortGame={abortGame}
+            navToHome={navToHome}
+            navToScoreboard={navToScoreboard}
+            tileSet={tileSet}
+          />
+        )}
+        {scoreboardActive && (
+          <ScoreScreen navToHome={navToHome} userData={userData} />
+        )}
       </main>
       <Footer />
       {/* <div>
