@@ -4,6 +4,7 @@ import TargetNamer from "./TargetNamer";
 function GameScreen({ abortGame, tileSet }) {
   const [currentTile, setCurrentTile] = useState();
   const [targetData, setTargetData] = useState([]);
+  const [foundTiles, setFoundTiles] = useState([]);
 
   const clickTile = (e) => {
     if (!currentTile) {
@@ -16,13 +17,6 @@ function GameScreen({ abortGame, tileSet }) {
       updateBannerText();
     }
     // console.log(currentTile);
-  };
-
-  const addCheckmark = () => {
-    const correctTile = document.getElementById(`${currentTile}`);
-    const checkmark = document.createElement("div");
-    checkmark.setAttribute("class", "checkmark");
-    correctTile.appendChild(checkmark);
   };
 
   const toggleTargetForm = () => {
@@ -58,18 +52,20 @@ function GameScreen({ abortGame, tileSet }) {
     let namedTarget = targetNamer.value;
     let target = targetData.find(({ name }) => name === namedTarget);
     if (target.location.includes(currentTile)) {
-
       updateBannerText(`Correct! ${namedTarget} is at ${currentTile}`);
-      addCheckmark();
+      // addCheckmark();
+      setFoundTiles([...foundTiles, currentTile]);
+
       resetBoard();
       // TODO: Update score/list display
-  
-      const remainingTargets = targetData.filter((unfound) => unfound.id !== target.id)
+
+      const remainingTargets = targetData.filter(
+        (unfound) => unfound.id !== target.id
+      );
       if (checkEndgame(remainingTargets)) {
-        alert("Finished!")
+        alert("Finished!");
       }
       setTargetData(remainingTargets);
-
     } else {
       updateBannerText(`Sorry, ${namedTarget} is NOT at ${currentTile}`);
       resetBoard();
@@ -108,7 +104,8 @@ function GameScreen({ abortGame, tileSet }) {
               onClick={clickTile}
             >
               {tile.key}
-              {currentTile == tile.key && <div id='targetMarker'></div>}
+              {currentTile == tile.key && <div id="targetMarker"></div>}
+              {foundTiles.includes(tile.key) && <div className='checkmark'></div>}
             </div>
           );
         })}
