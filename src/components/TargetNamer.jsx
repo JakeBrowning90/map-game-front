@@ -1,6 +1,4 @@
-function TargetNamer({targetData}) {
-
-
+function TargetNamer({ targetData }) {
   return (
     <select name="targetNamer" id="targetNamer">
       {targetData.map((target) => {

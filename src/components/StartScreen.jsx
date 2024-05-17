@@ -1,8 +1,8 @@
-function StartScreen({ navToScoreboard, navToGame, drawTileSet  }) {
+function StartScreen({ navToScoreboard, navToGame, drawTileSet }) {
   const startGame = () => {
-    navToGame()
-    drawTileSet()
-  }
+    navToGame();
+    drawTileSet();
+  };
   return (
     <div className="startScreen">
       <h1>Start Screen</h1>
