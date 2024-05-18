@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import TargetNamer from "./TargetNamer";
 
-function GameScreen({ abortGame, navToHome, navToScoreboard, tileSet }) {
+function GameScreen({
+  abortGame,
+  navToHome,
+  navToScoreboard,
+  tileSet,
+  userToBeat,
+}) {
   const [currentTile, setCurrentTile] = useState();
   const [targetData, setTargetData] = useState([]);
   const [foundTiles, setFoundTiles] = useState([]);
@@ -59,7 +65,11 @@ function GameScreen({ abortGame, navToHome, navToScoreboard, tileSet }) {
         (unfound) => unfound.id !== target.id
       );
       if (checkEndgame(remainingTargets)) {
-        alert(`Finished! ${timer}`);
+        if (timer < userToBeat.score) {
+          alert(`You finished in ${timer} seconds! Add your name to the scoreboard!`);
+        } else {
+          alert(`You finished in ${timer} seconds! Can you make it to the top 10?`);
+        }
         navToScoreboard();
       }
       setTargetData(remainingTargets);

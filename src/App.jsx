@@ -36,7 +36,6 @@ function App() {
   };
 
   const abortGame = () => {
-    // TODO: Reset target list on aborted game
     setGameActive(false);
     setHomeActive(true);
   };
@@ -61,6 +60,8 @@ function App() {
     getUsers();
   }, []);
 
+  const userToBeat = userData[userData.length - 1]
+
   return (
     <>
       <main>
@@ -77,6 +78,7 @@ function App() {
             navToHome={navToHome}
             navToScoreboard={navToScoreboard}
             tileSet={tileSet}
+            userToBeat = {userToBeat}
           />
         )}
         {scoreboardActive && (
