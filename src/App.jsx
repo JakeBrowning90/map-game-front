@@ -58,7 +58,7 @@ function App() {
       setUserData(data);
     };
     getUsers();
-  }, []);
+  }, [userData]);
 
   const userToBeat = userData[userData.length - 1]
 

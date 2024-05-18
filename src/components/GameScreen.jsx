@@ -12,6 +12,7 @@ function GameScreen({
   const [targetData, setTargetData] = useState([]);
   const [foundTiles, setFoundTiles] = useState([]);
   const [timer, setTimer] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
 
   const clickTile = (e) => {
     if (!currentTile) {
@@ -49,15 +50,51 @@ function GameScreen({
     }
   };
 
+  const submitScore = () => {
+    //Delete scoreToBeat
+    const deleteResponse = fetch(
+      `http://localhost:3000/users/${userToBeat.id}`,
+      {
+        mode: "cors",
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    //Add userScore
+    const playerName = document.querySelector("#playerName");
+    let name
+    if ( playerName.value) {
+      name = playerName.value;
+    } else {
+      name = "Anonymous player"
+    }
+
+
+    let response = fetch("http://localhost:3000/users", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        score: timer,
+      }),
+    });
+
+    navToScoreboard();
+  };
+
   function checkMove() {
     const targetNamer = document.querySelector("#targetNamer");
     let namedTarget = targetNamer.value;
     let target = targetData.find(({ name }) => name === namedTarget);
     if (target.location.includes(currentTile)) {
       updateBannerText(`Correct! ${namedTarget} is at ${currentTile}`);
-      // addCheckmark();
       setFoundTiles([...foundTiles, currentTile]);
-
       resetBoard();
       // TODO: Update score/list display
 
@@ -65,12 +102,7 @@ function GameScreen({
         (unfound) => unfound.id !== target.id
       );
       if (checkEndgame(remainingTargets)) {
-        if (timer < userToBeat.score) {
-          alert(`You finished in ${timer} seconds! Add your name to the scoreboard!`);
-        } else {
-          alert(`You finished in ${timer} seconds! Can you make it to the top 10?`);
-        }
-        navToScoreboard();
+        setGameOver(true);
       }
       setTargetData(remainingTargets);
     } else {
@@ -92,29 +124,58 @@ function GameScreen({
   }, []);
 
   useEffect(() => {
-    const key = setInterval(() => {
-      setTimer((timer) => timer + 1);
-    }, 1000);
+    if (!gameOver) {
+      const key = setInterval(() => {
+        setTimer((timer) => timer + 1);
+      }, 1000);
 
-    return () => {
-      clearInterval(key);
-    };
-  }, []);
+      return () => {
+        clearInterval(key);
+      };
+    }
+  }, [gameOver]);
 
   return (
     <div className="gameScreen">
       <h1>Game Screen</h1>
-
-      <div className="gameScreenControls">
-        <p>Time: {timer}</p>
-        <p className="banner">Click on a target in the image.</p>
-        {currentTile && (
-          <div className="targetForm">
-            <TargetNamer targetData={targetData} />
-            <button onClick={checkMove}>Check</button>
-          </div>
-        )}
-      </div>
+      {!gameOver ? (
+        <div className="gameScreenControls">
+          <p>Time: {timer}</p>
+          <p className="banner">Click on a target in the image.</p>
+          {currentTile && (
+            <div className="targetForm">
+              <TargetNamer targetData={targetData} />
+              <button onClick={checkMove}>Check</button>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="endGameControls">
+          {timer < userToBeat.score ? (
+            <form>
+              <p>
+                You finished in {timer} seconds! Add your name to the
+                scoreboard!
+              </p>
+              <input
+                type="text"
+                name=""
+                id="playerName"
+                minLength = "1"
+                maxLength = "20"
+              />
+              <button onClick={submitScore}>Submit score</button>
+            </form>
+          ) : (
+            <div>
+              <p>
+                You finished in {timer} seconds! Can you make it to the top 10?
+              </p>
+              <button onClick={navToScoreboard}>View scoreboard</button>
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="gameBoard">
         {tileSet.map((tile) => {

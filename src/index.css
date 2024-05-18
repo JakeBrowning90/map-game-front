@@ -87,6 +87,12 @@ main {
   height: 150px;
 }
 
+.endGameControls {
+  color: black;
+  background-color: rgb(255, 252, 47);
+  height: 150px;
+}
+
 .banner {
   padding: 0;
   margin: 0;
