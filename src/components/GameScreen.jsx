@@ -59,7 +59,7 @@ function GameScreen({ abortGame, navToHome, navToScoreboard, tileSet }) {
         (unfound) => unfound.id !== target.id
       );
       if (checkEndgame(remainingTargets)) {
-        alert(`Finished! ${timer * 100}`);
+        alert(`Finished! ${timer}`);
         navToScoreboard();
       }
       setTargetData(remainingTargets);
