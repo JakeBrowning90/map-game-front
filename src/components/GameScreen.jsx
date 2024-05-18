@@ -59,12 +59,14 @@ function GameScreen({ abortGame, navToHome, navToScoreboard, tileSet }) {
         (unfound) => unfound.id !== target.id
       );
       if (checkEndgame(remainingTargets)) {
-        alert(`Finished in  ${timer} seconds!`);
+        alert(`Finished! ${timer * 100}`);
         navToScoreboard();
       }
       setTargetData(remainingTargets);
     } else {
       updateBannerText(`Sorry, ${namedTarget} is NOT at ${currentTile}`);
+      // Penalty for mistake (Change this penalty system?)
+      setTimer((timer) => timer + 10);
       resetBoard();
     }
   }
