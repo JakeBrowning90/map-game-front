@@ -5,6 +5,7 @@ function GameScreen({ abortGame, navToHome, navToScoreboard, tileSet }) {
   const [currentTile, setCurrentTile] = useState();
   const [targetData, setTargetData] = useState([]);
   const [foundTiles, setFoundTiles] = useState([]);
+  const [timer, setTimer] = useState(0);
 
   const clickTile = (e) => {
     if (!currentTile) {
@@ -58,7 +59,7 @@ function GameScreen({ abortGame, navToHome, navToScoreboard, tileSet }) {
         (unfound) => unfound.id !== target.id
       );
       if (checkEndgame(remainingTargets)) {
-        alert("Finished!");
+        alert(`Finished in  ${timer} seconds!`);
         navToScoreboard();
       }
       setTargetData(remainingTargets);
@@ -78,11 +79,22 @@ function GameScreen({ abortGame, navToHome, navToScoreboard, tileSet }) {
     getTargets();
   }, []);
 
+  useEffect(() => {
+    const key = setInterval(() => {
+      setTimer((timer) => timer + 1);
+    }, 1000);
+
+    return () => {
+      clearInterval(key);
+    };
+  }, []);
+
   return (
     <div className="gameScreen">
       <h1>Game Screen</h1>
 
       <div className="gameScreenControls">
+        <p>Time: {timer}</p>
         <p className="banner">Click on a target in the image.</p>
         {currentTile && (
           <div className="targetForm">
