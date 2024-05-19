@@ -185,7 +185,7 @@ function GameScreen({
               id={tile.key}
               onClick={clickTile}
             >
-              {tile.key}
+              {/* {tile.key} */}
               {currentTile == tile.key && <div id="targetMarker"></div>}
               {foundTiles.includes(tile.key) && (
                 <div className="checkmark"></div>
