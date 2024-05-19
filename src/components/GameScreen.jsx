@@ -52,7 +52,7 @@ function GameScreen({
 
   const submitScore = () => {
     //Delete scoreToBeat
-    const deleteResponse = fetch(
+    fetch(
       `http://localhost:3000/users/${userToBeat.id}`,
       {
         mode: "cors",
@@ -65,15 +65,14 @@ function GameScreen({
 
     //Add userScore
     const playerName = document.querySelector("#playerName");
-    let name
-    if ( playerName.value) {
+    let name;
+    if (playerName.value) {
       name = playerName.value;
     } else {
-      name = "Anonymous player"
+      name = "Anonymous player";
     }
 
-
-    let response = fetch("http://localhost:3000/users", {
+    fetch("http://localhost:3000/users", {
       method: "POST",
       mode: "cors",
       headers: {
@@ -83,9 +82,9 @@ function GameScreen({
         name: name,
         score: timer,
       }),
-    });
+    }).then(navToScoreboard())
 
-    navToScoreboard();
+    // navToScoreboard();
   };
 
   function checkMove() {
@@ -161,8 +160,8 @@ function GameScreen({
                 type="text"
                 name=""
                 id="playerName"
-                minLength = "1"
-                maxLength = "20"
+                minLength="1"
+                maxLength="20"
               />
               <button onClick={submitScore}>Submit score</button>
             </form>
