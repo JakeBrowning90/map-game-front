@@ -107,7 +107,7 @@ function GameScreen({
     } else {
       updateBannerText(`Sorry, ${namedTarget} is NOT at ${currentTile}`);
       // Penalty for mistake (Change this penalty system?)
-      setTimer((timer) => timer + 10);
+      setTimer((timer) => timer + 1001);
       resetBoard();
     }
   }
@@ -125,7 +125,7 @@ function GameScreen({
   useEffect(() => {
     if (!gameOver) {
       const key = setInterval(() => {
-        setTimer((timer) => timer + 1);
+        setTimer((timer) => timer + 100);
       }, 1000);
 
       return () => {
@@ -153,7 +153,7 @@ function GameScreen({
           {timer < userToBeat.score ? (
             <form>
               <p>
-                You finished in {timer} seconds! Add your name to the
+                You finished in the top ten! Add your name to the
                 scoreboard!
               </p>
               <input
@@ -168,7 +168,7 @@ function GameScreen({
           ) : (
             <div>
               <p>
-                You finished in {timer} seconds! Can you make it to the top 10?
+                Your score is {timer}! Can you make it to the top ten?
               </p>
               <button onClick={navToScoreboard}>View scoreboard</button>
             </div>
