@@ -52,16 +52,13 @@ function GameScreen({
 
   const submitScore = () => {
     //Delete scoreToBeat
-    fetch(
-      `http://localhost:3000/users/${userToBeat.id}`,
-      {
-        mode: "cors",
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    fetch(`http://localhost:3000/users/${userToBeat.id}`, {
+      mode: "cors",
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     //Add userScore
     const playerName = document.querySelector("#playerName");
@@ -82,7 +79,7 @@ function GameScreen({
         name: name,
         score: timer,
       }),
-    }).then(navToScoreboard())
+    }).then(navToScoreboard());
 
     // navToScoreboard();
   };
@@ -136,66 +133,67 @@ function GameScreen({
 
   return (
     <div className="gameScreen">
-      <h1>Game Screen</h1>
-      {!gameOver ? (
-        <div className="gameScreenControls">
-          <p>Time: {timer}</p>
-          <p className="banner">Click on a target in the image.</p>
-          {currentTile && (
-            <div className="targetForm">
-              <TargetNamer targetData={targetData} />
-              <button onClick={checkMove}>Check</button>
-            </div>
-          )}
-        </div>
-      ) : (
-        <div className="endGameControls">
-          {timer < userToBeat.score ? (
-            <form>
-              <p>
-                You finished in the top ten! Add your name to the
-                scoreboard!
-              </p>
-              <input
-                type="text"
-                name=""
-                id="playerName"
-                minLength="1"
-                maxLength="20"
-              />
-              <button onClick={submitScore}>Submit score</button>
-            </form>
-          ) : (
-            <div>
-              <p>
-                Your score is {timer}! Can you make it to the top ten?
-              </p>
-              <button onClick={navToScoreboard}>View scoreboard</button>
-            </div>
-          )}
-        </div>
-      )}
-
-      <div className="gameBoard">
-        {tileSet.map((tile) => {
-          return (
-            <div
-              className="gameTile"
-              key={tile.key}
-              id={tile.key}
-              onClick={clickTile}
-            >
-              {/* {tile.key} */}
-              {currentTile == tile.key && <div id="targetMarker"></div>}
-              {foundTiles.includes(tile.key) && (
-                <div className="checkmark"></div>
-              )}
-            </div>
-          );
-        })}
+      <div className="gameScreenSidebar">
+        <p>Time: {timer}</p>
+        <p>Remaining: {targetData.length} </p>
+        {!gameOver ? (
+          <div className="gameScreenControls">
+            {currentTile && (
+              <div className="targetForm">
+                <TargetNamer targetData={targetData} />
+                <button onClick={checkMove}>Check</button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="endGameControls">
+            {timer < userToBeat.score ? (
+              <form>
+                <p>
+                  You finished in the top ten! Add your name to the scoreboard!
+                </p>
+                <input
+                  type="text"
+                  name=""
+                  id="playerName"
+                  minLength="1"
+                  maxLength="20"
+                />
+                <button onClick={submitScore}>Submit score</button>
+              </form>
+            ) : (
+              <div>
+                <p>Your score is {timer}! Can you make it to the top ten?</p>
+                <button onClick={navToScoreboard}>View scoreboard</button>
+              </div>
+            )}
+          </div>
+        )}
+        <button className="cancelGameButton" onClick={navToHome}>
+          Return Home
+        </button>
       </div>
-      {/* //TODO: add function to clear all game data + navToHome */}
-      <button onClick={navToHome}>Return Home</button>
+      <div>
+        <p className="banner">Click on a target in the image.</p>
+        <div className="gameBoard">
+          {tileSet.map((tile) => {
+            return (
+              <div
+                className="gameTile"
+                key={tile.key}
+                id={tile.key}
+                onClick={clickTile}
+              >
+                {/* {tile.key} */}
+                {currentTile == tile.key && <div id="targetMarker"></div>}
+                {foundTiles.includes(tile.key) && (
+                  <div className="checkmark"></div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 }

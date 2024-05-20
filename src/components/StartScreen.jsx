@@ -12,7 +12,7 @@ function StartScreen({ navToScoreboard, navToGame, drawTileSet }) {
         <li>Think carefully: incorrect guesses are penalized!</li>
       </ul>
       <button onClick={startGame}>Start Game</button>
-      <button onClick={navToScoreboard}>High Scores</button>
+      <button onClick={navToScoreboard}>Leaderboard</button>
     </div>
   );
 }
