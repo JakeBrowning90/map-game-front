@@ -134,8 +134,11 @@ function GameScreen({
   return (
     <div className="gameScreen">
       <div className="gameScreenSidebar">
-        <p>Time: {timer}</p>
-        <p>Remaining: {targetData.length} </p>
+        <div className="gameStatus">
+          <p>Time: {timer}</p>
+          <p>Remaining: {targetData.length} </p>
+        </div>
+
         {!gameOver ? (
           <div className="gameScreenControls">
             {currentTile && (

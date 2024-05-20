@@ -94,16 +94,21 @@ main {
 .gameScreenSidebar {
   width: 200px;
 }
+
+.gameStatus {
+  color: black;
+  background-color: rgb(0, 255, 38);
+}
+
+
 .gameScreenControls {
   color: black;
   background-color: greenyellow;
-  /* height: 150px; */
 }
 
 .endGameControls {
   color: black;
   background-color: rgb(255, 252, 47);
-  /* height: 150px; */
 }
 
 .banner {
@@ -121,7 +126,7 @@ main {
   box-sizing: border-box;
   border: 2px solid yellow;
   aspect-ratio: 4/3;
-  height: 600px;
+  height: 700px;
   width: auto;
   /* background-color: rgb(223, 223, 223); */
   background-image: url("./assets/whereswaldoFruit.jpeg");
