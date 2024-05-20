@@ -133,12 +133,15 @@ function GameScreen({
 
   return (
     <div className="gameScreen">
+      {/* 1 */}
+      <div className="gameStatus">
+        <p>Time: {timer}</p>
+        <p>Remaining: {targetData.length} </p>
+      </div>
+      {/* 2 */}
+      <p className="banner">Click on a target in the image.</p>
+      {/* 3 */}
       <div className="gameScreenSidebar">
-        <div className="gameStatus">
-          <p>Time: {timer}</p>
-          <p>Remaining: {targetData.length} </p>
-        </div>
-
         {!gameOver ? (
           <div className="gameScreenControls">
             {currentTile && (
@@ -172,31 +175,29 @@ function GameScreen({
             )}
           </div>
         )}
-        <button className="cancelGameButton" onClick={navToHome}>
-          Return Home
-        </button>
       </div>
-      <div>
-        <p className="banner">Click on a target in the image.</p>
-        <div className="gameBoard">
-          {tileSet.map((tile) => {
-            return (
-              <div
-                className="gameTile"
-                key={tile.key}
-                id={tile.key}
-                onClick={clickTile}
-              >
-                {/* {tile.key} */}
-                {currentTile == tile.key && <div id="targetMarker"></div>}
-                {foundTiles.includes(tile.key) && (
-                  <div className="checkmark"></div>
-                )}
-              </div>
-            );
-          })}
-        </div>
+
+      <div className="gameBoard">
+        {tileSet.map((tile) => {
+          return (
+            <div
+              className="gameTile"
+              key={tile.key}
+              id={tile.key}
+              onClick={clickTile}
+            >
+              {/* {tile.key} */}
+              {currentTile == tile.key && <div id="targetMarker"></div>}
+              {foundTiles.includes(tile.key) && (
+                <div className="checkmark"></div>
+              )}
+            </div>
+          );
+        })}
       </div>
+      <button className="cancelGameButton" onClick={navToHome}>
+        Return Home
+      </button>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 function ScoreScreen({ navToHome, userData }) {
   return (
     <div className="scoreScreen">
-      <h1>Score Screen</h1>
+      <h1>Leaderboard</h1>
 
       <ol>
         {userData.map((user) => {
