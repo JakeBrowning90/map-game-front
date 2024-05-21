@@ -14,7 +14,7 @@ function ScoreScreen({ navToHome, userData }) {
         })}
       </ul>
 
-      <button onClick={navToHome}>Return Home</button>
+      <button className="scoreHomeButton" onClick={navToHome}>Return Home</button>
     </div>
   );
 }
