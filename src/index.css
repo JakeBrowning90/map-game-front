@@ -74,21 +74,42 @@ main {
   padding: 10px;
 }
 
-.startScreen {
+.startScreen,
+.scoreScreen {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 3fr 1fr;
+  grid-template-rows: 100px 1fr 50px;
   gap: 10px;
-  height: 500px;
   width: auto;
 }
 
-.startTitle,
-.startUl {
+.screenTitle,
+.screenBody {
   grid-column: 1 / -1;
   background-color: var(--americana-dark-blue);
-  padding: 10px;
-  border-radius: 10px;
+  padding: 20px;
+  border-radius: 5px;
+  list-style: inside;
+}
+
+.screenTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.scoreList {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.scoreLI {
+  background-color: var(--americana-light-blue);
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  font-weight: 700;
 }
 
 .gameScreen {
@@ -161,10 +182,6 @@ main {
   height: 100%;
   border: 5px solid #ff0000;
   z-index: 2;
-}
-
-.scoreScreen {
-  background-color: var(--americana-dark-blue);
 }
 
 footer {

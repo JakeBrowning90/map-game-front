@@ -1,17 +1,18 @@
 function ScoreScreen({ navToHome, userData }) {
   return (
     <div className="scoreScreen">
-      <h1>Leaderboard</h1>
+      <h1 className="screenTitle"> Leaderboard</h1>
 
-      <ol>
-        {userData.map((user) => {
+      <ul className="screenBody scoreList">
+        {userData.map((user, index) => {
           return (
-            <li key={user.id}>
-              {user.name}: {user.score}
+            <li key={user.id} className="scoreLI">
+              <span>{index + 1}. {user.name}</span>
+              <span>{user.score}</span>
             </li>
           );
         })}
-      </ol>
+      </ul>
 
       <button onClick={navToHome}>Return Home</button>
     </div>
