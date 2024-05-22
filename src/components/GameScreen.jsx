@@ -15,16 +15,18 @@ function GameScreen({
   const [gameOver, setGameOver] = useState(false);
 
   const clickTile = (e) => {
-    if (!currentTile) {
-      setCurrentTile(e.target.id);
-      if (!e.target.id) {
-        updateBannerText("You've already found something here!");
+    if (!gameOver) {
+      if (!currentTile) {
+        setCurrentTile(e.target.id);
+        if (!e.target.id) {
+          updateBannerText("You've already found something here!");
+        } else {
+          updateBannerText("What is this?");
+        }
       } else {
-        updateBannerText("What is this?");
+        resetBoard();
+        updateBannerText();
       }
-    } else {
-      resetBoard();
-      updateBannerText();
     }
   };
 
@@ -130,6 +132,7 @@ function GameScreen({
     getTargets();
   }, []);
 
+  //If NOT gameover, run timer
   useEffect(() => {
     if (!gameOver) {
       const key = setInterval(() => {
