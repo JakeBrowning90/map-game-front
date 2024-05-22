@@ -169,7 +169,7 @@ function GameScreen({
         ) : (
           <div className="endGameControls">
             {timer < userToBeat.score ? (
-              <form>
+              <form className="newScoreForm">
                 <p>
                   You finished in the top ten! Add your name to the scoreboard!
                 </p>
