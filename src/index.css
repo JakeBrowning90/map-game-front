@@ -139,8 +139,7 @@ main {
 .triviaBanner,
 .gameScreenSidebar,
 .banner,
-.gameScreenControls > * 
-.endGameControls {
+.gameScreenControls > * .endGameControls {
   border-radius: 5px;
   justify-content: center;
   padding: 5px;
@@ -168,7 +167,8 @@ main {
   margin-bottom: auto;
 }
 
-.gameScreenControls > *, .endGameControls>*{
+.gameScreenControls > *,
+.endGameControls > * {
   background-color: var(--americana-light-blue);
   width: 100%;
   display: flex;
@@ -177,7 +177,7 @@ main {
   padding: 5px;
   border-radius: 5px;
 }
-#playerName{
+#playerName {
   width: 100%;
 }
 .gameBoard {
@@ -198,7 +198,7 @@ main {
 }
 
 .gameTile {
-  border: 1px solid rgba(128, 128, 128, 0.507);
+  /* border: 1px solid rgba(128, 128, 128, 0.507); */
   color: black;
   z-index: 0;
 }
@@ -207,18 +207,25 @@ main {
   background-color: var(--americana-trans-red);
 }
 
-#targetMarker {
+#targetMarker,
+.checkmark {
   height: 100%;
-  border: 5px solid var(--americana-light-red);
-  /* border-radius: 50%; */
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+#targetMarker {
+  border: 1px solid var(--americana-trans-red);
+  border-radius: 50%;
+  background-color: #fdf0d56c;
+  background-image: url("./assets/red-question-mark-svgrepo-com.svg");
   z-index: 1;
 }
 
 .checkmark {
-  height: 100%;
-  /* border: 5px solid #ff0000; */
   background-image: url("./assets/Map_pin_icon.svg");
-  background-repeat: no-repeat;
   z-index: 2;
 }
 

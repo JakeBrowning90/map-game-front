@@ -59,7 +59,7 @@ function App() {
     getUsers();
   }, [scoreboardActive]);
 
-  const userToBeat = userData[userData.length - 1]
+  const userToBeat = userData[userData.length - 1];
 
   return (
     <>
@@ -77,7 +77,7 @@ function App() {
             navToHome={navToHome}
             navToScoreboard={navToScoreboard}
             tileSet={tileSet}
-            userToBeat = {userToBeat}
+            userToBeat={userToBeat}
           />
         )}
         {scoreboardActive && (
@@ -85,7 +85,6 @@ function App() {
         )}
       </main>
       <Footer />
-
     </>
   );
 }
