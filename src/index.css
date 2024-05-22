@@ -1,7 +1,7 @@
 :root {
   --americana-dark-red: #780000;
   --americana-light-red: #c1121f;
-  --americana-trans-red: #c1121e36;
+  --americana-trans-red: #c1121e4f;
   --americana-dark-blue: #003049;
   --americana-light-blue: #669bbc;
   --americana-pale: #fdf0d5;
@@ -117,7 +117,7 @@ main {
   font-weight: 700;
 }
 
-.scoreHomeButton{
+.scoreHomeButton {
   grid-column: 1/-1;
 }
 
@@ -136,29 +136,38 @@ main {
 }
 
 .gameStatus,
-.banner,
+.triviaBanner,
 .gameScreenSidebar,
-.gameScreenControls, 
-.targetForm,
+.banner,
+.gameScreenControls > *,
 .endGameControls {
   border-radius: 5px;
   justify-content: center;
   padding: 5px;
+  gap: 5px;
 }
 
 .gameStatus,
-.gameScreenSidebar{
+.gameScreenSidebar {
   background-color: var(--americana-dark-blue);
 }
-
+.triviaBanner,
 .banner {
   color: var(--americana-dark-red);
   background-color: whitesmoke;
 }
 
-.gameScreenControls {
-  height: 100%;
-  /* background-color: var(--americana-light-red); */
+.triviaBanner {
+  font-style: italic;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.gameScreenControls,
+.endGameControls {
+  margin-bottom: auto;
+  /* height: 100%; */
+  /* background-color: var(--americana-light-blue); */
 }
 
 .gameScreenControls > * {
@@ -166,7 +175,6 @@ main {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 5px;
 }
 
 .gameBoard {
@@ -198,14 +206,16 @@ main {
 
 #targetMarker {
   height: 100%;
-  border: 5px solid #fffb00;
+  border: 5px solid var(--americana-light-red);
   /* border-radius: 50%; */
   z-index: 1;
 }
 
 .checkmark {
   height: 100%;
-  border: 5px solid #ff0000;
+  /* border: 5px solid #ff0000; */
+  background-image: url('./assets/Map_pin_icon.svg');
+  background-repeat: no-repeat;
   z-index: 2;
 }
 

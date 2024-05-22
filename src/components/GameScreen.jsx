@@ -42,6 +42,15 @@ function GameScreen({
     }
   };
 
+  const updateTriviaText = (string) => {
+    const trivia = document.querySelector(".triviaBanner");
+    if (string == undefined) {
+      trivia.textContent = null;
+    } else {
+      trivia.textContent = string;
+    }
+  };
+
   const checkEndgame = (remaining) => {
     if (remaining.length == 0) {
       return true;
@@ -90,7 +99,8 @@ function GameScreen({
     let target = targetData.find(({ name }) => name === namedTarget);
     let random = Math.floor(Math.random() * target.trivia.length);
     if (target.location.includes(currentTile)) {
-      updateBannerText(`Correct! ${namedTarget} is at ${currentTile}. ${target.trivia[random]}`);
+      updateBannerText(`Correct! ${namedTarget} is at ${currentTile}. `);
+      updateTriviaText(`${target.trivia[random]}`);
       setFoundTiles([...foundTiles, currentTile]);
       resetBoard();
       // TODO: Update score/list display
@@ -140,9 +150,10 @@ function GameScreen({
         <p>Remaining: {targetData.length} </p>
       </div>
       {/* 2 */}
-      <p className="banner">Click on a target in the image.</p>
+      <p className="triviaBanner"></p>
       {/* 3 */}
       <div className="gameScreenSidebar">
+        <p className="banner">Click on a target in the image.</p>
         {!gameOver ? (
           <div className="gameScreenControls">
             {currentTile && (
