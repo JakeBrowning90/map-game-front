@@ -13,6 +13,8 @@ function GameScreen({
   const [foundTiles, setFoundTiles] = useState([]);
   const [timer, setTimer] = useState(0);
   const [gameOver, setGameOver] = useState(false);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const clickTile = (e) => {
     if (!gameOver) {
@@ -123,13 +125,25 @@ function GameScreen({
   }
 
   useEffect(() => {
-    const getTargets = async () => {
-      let response = await fetch("http://localhost:3000/targets");
-      let data = await response.json();
-      // TODO: add a found boolean?
-      setTargetData(data);
-    };
-    getTargets();
+    // const getTargets = async () => {
+    //   let response = await fetch("http://localhost:3000/targets");
+    //   let data = await response.json();
+    //   // TODO: add a found boolean?
+    //   setTargetData(data);
+    // };
+    // getTargets();
+    fetch("http://localhost:3000/targets", { mode: "cors" })
+      .then((response) => {
+        if (response.status >= 400) {
+          throw new Error(
+            "There was an error connecting to the server, please try again later."
+          );
+        }
+        return response.json;
+      })
+      .then((response) => setTargetData(response))
+      .catch((error) => setError(error))
+      .finally(() => setLoading(false));
   }, []);
 
   //If NOT gameover, run timer
@@ -144,6 +158,9 @@ function GameScreen({
       };
     }
   }, [gameOver]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>A network error was encountered</p>;
 
   return (
     <div className="gameScreen">

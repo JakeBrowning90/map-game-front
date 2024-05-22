@@ -84,6 +84,7 @@ function App() {
           <ScoreScreen navToHome={navToHome} userData={userData} />
         )}
       </main>
+
       <Footer />
     </>
   );
