@@ -88,8 +88,9 @@ function GameScreen({
     const targetNamer = document.querySelector("#targetNamer");
     let namedTarget = targetNamer.value;
     let target = targetData.find(({ name }) => name === namedTarget);
+    let random = Math.floor(Math.random() * target.trivia.length);
     if (target.location.includes(currentTile)) {
-      updateBannerText(`Correct! ${namedTarget} is at ${currentTile}`);
+      updateBannerText(`Correct! ${namedTarget} is at ${currentTile}. ${target.trivia[random]}`);
       setFoundTiles([...foundTiles, currentTile]);
       resetBoard();
       // TODO: Update score/list display
