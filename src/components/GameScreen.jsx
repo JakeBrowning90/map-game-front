@@ -16,7 +16,6 @@ function GameScreen({
   const [timer, setTimer] = useState(0);
   const [gameOver, setGameOver] = useState(false);
 
-
   const clickTile = (e) => {
     if (!gameOver) {
       if (!currentTile) {
@@ -64,17 +63,13 @@ function GameScreen({
     }
   };
 
-  const submitScore = () => {
-    //Delete scoreToBeat
-    fetch(`http://localhost:3000/users/${userToBeat.id}`, {
-      mode: "cors",
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+  function updateScoreboard() {
+    addUserscore();
+    deleteBeatenScore();
+    navToScoreboard();
+  }
 
-    //Add userScore
+  const addUserscore = () => {
     const playerName = document.querySelector("#playerName");
     let name;
     if (playerName.value) {
@@ -93,9 +88,17 @@ function GameScreen({
         name: name,
         score: timer,
       }),
-    }).then(navToScoreboard());
+    });
+  };
 
-    // navToScoreboard();
+  const deleteBeatenScore = () => {
+    fetch(`http://localhost:3000/users/${userToBeat.id}`, {
+      mode: "cors",
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   };
 
   function checkMove() {
@@ -182,7 +185,7 @@ function GameScreen({
                   minLength="1"
                   maxLength="20"
                 />
-                <button onClick={submitScore}>Submit score</button>
+                <button onClick={updateScoreboard}>Submit score</button>
               </form>
             ) : (
               <div>
