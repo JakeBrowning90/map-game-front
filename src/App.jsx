@@ -10,7 +10,7 @@ import Footer from "./components/Footer";
 function App() {
   // const [count, setCount] = useState(0);
   const [userData, setUserData] = useState([]);
-  // const [targetData, setTargetData] = useState([]);
+  const [targetData, setTargetData] = useState([]);
   const [tileSet, setTileSet] = useState([]);
   const [homeActive, setHomeActive] = useState(true);
   const [gameActive, setGameActive] = useState(false);
@@ -59,6 +59,15 @@ function App() {
     getUsers();
   }, [scoreboardActive]);
 
+  useEffect(() => {
+    const getTargets = async () => {
+      let response = await fetch("http://localhost:3000/targets");
+      let data = await response.json();
+      setTargetData(data);
+    };
+    getTargets();
+  }, [gameActive]);
+
   const userToBeat = userData[userData.length - 1];
 
   return (
@@ -76,6 +85,8 @@ function App() {
             abortGame={abortGame}
             navToHome={navToHome}
             navToScoreboard={navToScoreboard}
+            targetData={targetData}
+            setTargetData={setTargetData}
             tileSet={tileSet}
             userToBeat={userToBeat}
           />

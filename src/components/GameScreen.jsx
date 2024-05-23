@@ -5,11 +5,13 @@ function GameScreen({
   abortGame,
   navToHome,
   navToScoreboard,
+  targetData,
+  setTargetData,
   tileSet,
   userToBeat,
 }) {
   const [currentTile, setCurrentTile] = useState();
-  const [targetData, setTargetData] = useState([]);
+  // const [targetData, setTargetData] = useState([]);
   const [foundTiles, setFoundTiles] = useState([]);
   const [timer, setTimer] = useState(0);
   const [gameOver, setGameOver] = useState(false);
@@ -123,14 +125,14 @@ function GameScreen({
     }
   }
 
-  useEffect(() => {
-    const getTargets = async () => {
-      let response = await fetch("http://localhost:3000/targets");
-      let data = await response.json();
-      setTargetData(data);
-    };
-    getTargets();
-  }, []);
+  // useEffect(() => {
+  //   const getTargets = async () => {
+  //     let response = await fetch("http://localhost:3000/targets");
+  //     let data = await response.json();
+  //     setTargetData(data);
+  //   };
+  //   getTargets();
+  // }, []);
 
   //If NOT gameover, run timer
   useEffect(() => {
