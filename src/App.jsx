@@ -15,6 +15,7 @@ function App() {
   const [homeActive, setHomeActive] = useState(true);
   const [gameActive, setGameActive] = useState(false);
   const [scoreboardActive, setScoreboardActive] = useState(false);
+  const [error, setError] = useState(null);
 
   const navToHome = () => {
     setHomeActive(true);
@@ -50,25 +51,60 @@ function App() {
     }
   };
 
+  // useEffect(() => {
+  //   const getUsers = async () => {
+  //     let response = await fetch("http://localhost:3000/users");
+  //     let data = await response.json();
+  //     setUserData(data);
+  //   };
+  //   getUsers();
+  // }, [scoreboardActive]);
+
+  // useEffect(() => {
+  //   const getTargets = async () => {
+  //     let response = await fetch("http://localhost:3000/targets");
+  //     let data = await response.json();
+  //     setTargetData(data);
+  //   };
+  //   getTargets();
+  // }, [gameActive]);
+
   useEffect(() => {
-    const getUsers = async () => {
-      let response = await fetch("http://localhost:3000/users");
-      let data = await response.json();
-      setUserData(data);
-    };
-    getUsers();
+    fetch("http://localhost:3000/users", { mode: "cors" })
+      .then((response) => {
+        if (response.status >= 400) {
+          throw new Error("user fetch error");
+        }
+        return response.json();
+      })
+      .then((response) => setUserData(response))
+      .catch((error) => setError(error));
   }, [scoreboardActive]);
 
   useEffect(() => {
-    const getTargets = async () => {
-      let response = await fetch("http://localhost:3000/targets");
-      let data = await response.json();
-      setTargetData(data);
-    };
-    getTargets();
+    fetch("http://localhost:3000/targets", { mode: "cors" })
+      .then((response) => {
+        if (response.status >= 400) {
+          throw new Error("user fetch error");
+        }
+        return response.json();
+      })
+      .then((response) => setTargetData(response))
+      .catch((error) => console.error(error));
   }, [gameActive]);
 
   const userToBeat = userData[userData.length - 1];
+
+  if (error)
+    return (
+      <>
+        <main>
+          <p>
+            Sorry, there is a network error. Please try this page again later.
+          </p>
+        </main>
+      </>
+    );
 
   return (
     <>
