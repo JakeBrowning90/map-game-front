@@ -122,72 +122,104 @@ main {
 }
 
 .gameScreen {
+  box-sizing: border-box;
   height: 700px;
-  width: 1200px;
+  /* width: 1200px; */
   display: grid;
-  grid-template-columns: 1fr 1000px;
-  grid-template-rows: 1fr 9fr 1fr;
+  grid-template-columns: 200px 1000px;
+  grid-template-rows: 50px 1fr 50px;
   gap: 10px;
 }
 
-.gameScreen > * {
+/* .gameScreen > * {
   display: flex;
   flex-direction: column;
+} */
+
+.gameStatus {
+  background-color: var(--americana-dark-blue);
+}
+.triviaBanner {
+  background-color: whitesmoke;
+  color: var(--americana-light-red)
 }
 
-.gameStatus,
-.triviaBanner,
-.gameScreenSidebar,
-.banner,
-.gameScreenControls > * .endGameControls {
-  border-radius: 5px;
-  justify-content: center;
-  padding: 5px;
+.gameScreenSidebar {
+  background-color: var(--americana-dark-blue);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   gap: 5px;
 }
 
-.gameStatus,
+.banner {
+  background-color: whitesmoke;
+  color: var(--americana-light-red)
+
+}
+.gameScreenControls {
+  background-color: var(--americana-light-blue);
+  max-height: 500px;
+  /* overflow: scroll; */
+}
+
+.cityList {
+  background-color: var(--americana-dark-blue);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  height: 100%;
+  overflow: scroll;
+}
+
+.cityList > * {
+  border-radius: 5px;
+  background-color: var(--americana-light-blue);
+}
+
+/* .gameStatus,
 .gameScreenSidebar {
   background-color: var(--americana-dark-blue);
-}
-.triviaBanner,
+} */
+/* .triviaBanner,
 .banner {
   color: var(--americana-dark-red);
   background-color: whitesmoke;
-}
+} */
 
-.triviaBanner {
+/* .triviaBanner {
   font-style: italic;
   font-weight: bold;
   font-size: 1.2em;
-}
+} */
 
-.gameScreenControls,
+/* .gameScreenControls,
 .endGameControls {
   margin-bottom: auto;
-}
+} */
 
-.gameScreenControls > *,
+/* .gameScreenControls > *,
 .endGameControls > * {
   background-color: var(--americana-light-blue);
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 5px;
-  padding: 5px;
   border-radius: 5px;
-}
+  max-height: 400px;
+  overflow: scroll;
+} */
 
 #playerName {
   width: 100%;
 }
 .gameBoard {
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   border: 2px solid var(--americana-light-red);
   /* aspect-ratio: 4/3; */
   grid-column: 2 /-1;
   grid-row: 2 /-1;
-  height: 100%;
+  width: 100%;
   /* width: auto; */
   /* background-image: url("./assets/whereswaldoFruit.jpeg"); */
   background-image: url("./assets/usMapBlue1.png");

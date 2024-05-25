@@ -57,7 +57,7 @@ function GameScreen({
   };
 
   const checkEndgame = (remaining) => {
-    if (remaining.length == 0) {
+    if (remaining.length == 49) {
       return true;
     } else {
       return false;
@@ -157,10 +157,19 @@ function GameScreen({
         {!gameOver ? (
           <div className="gameScreenControls">
             {currentTile && (
-              <div className="targetForm">
-                <TargetNamer targetData={targetData} />
-                <button onClick={checkMove}>Check</button>
-              </div>
+              // <div className="targetForm">
+              //   <TargetNamer targetData={targetData} />
+              //   <button onClick={checkMove}>Check</button>
+              // </div>
+              <ul className="cityList">
+                {targetData.map((target) => {
+                  return (
+                    <li key={target.id} id={target.key}>
+                      {target.name}
+                    </li>
+                  );
+                })}
+              </ul>
             )}
           </div>
         ) : (
