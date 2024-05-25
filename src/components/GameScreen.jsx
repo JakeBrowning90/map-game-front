@@ -86,11 +86,11 @@ function GameScreen({
     }
   };
 
-  function updateScoreboard() {
+  const updateScoreboard = () => {
     addUserscore();
     deleteBeatenScore();
     navToScoreboard();
-  }
+  };
 
   const addUserscore = () => {
     const playerName = document.querySelector("#playerName");
