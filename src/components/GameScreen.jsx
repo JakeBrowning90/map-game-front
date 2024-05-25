@@ -20,10 +20,11 @@ function GameScreen({
     if (!gameOver) {
       if (!currentTile) {
         setCurrentTile(e.target.id);
+        console.log(e.target.id);
         if (!e.target.id) {
           updateBannerText("You've already found something here!");
         } else {
-          updateBannerText("What is this?");
+          updateBannerText("Which city is this?");
         }
       } else {
         resetBoard();
@@ -40,7 +41,7 @@ function GameScreen({
   const updateBannerText = (string) => {
     const banner = document.querySelector(".banner");
     if (string == undefined) {
-      banner.textContent = "Click on a target in the image.";
+      banner.textContent = "Click on a star in the image.";
     } else {
       banner.textContent = string;
     }
@@ -107,8 +108,8 @@ function GameScreen({
     let target = targetData.find(({ name }) => name === namedTarget);
     let random = Math.floor(Math.random() * target.trivia.length);
     if (target.location.includes(currentTile)) {
-      updateBannerText(`Correct! ${namedTarget} is at ${currentTile}. `);
-      updateTriviaText(`${target.trivia[random]}`);
+      updateBannerText(`Correct! You located ${namedTarget}.`);
+      updateTriviaText(`Fun fact: ${target.trivia[random]}`);
       setFoundTiles([...foundTiles, currentTile]);
       resetBoard();
       // TODO: Update score/list display
@@ -121,21 +122,12 @@ function GameScreen({
       }
       setTargetData(remainingTargets);
     } else {
-      updateBannerText(`Sorry, ${namedTarget} is NOT at ${currentTile}`);
+      updateBannerText(`Sorry, try again!`);
       // Penalty for mistake (Change this penalty system?)
       setTimer((timer) => timer + 1001);
       resetBoard();
     }
   }
-
-  // useEffect(() => {
-  //   const getTargets = async () => {
-  //     let response = await fetch("http://localhost:3000/targets");
-  //     let data = await response.json();
-  //     setTargetData(data);
-  //   };
-  //   getTargets();
-  // }, []);
 
   //If NOT gameover, run timer
   useEffect(() => {
@@ -161,7 +153,7 @@ function GameScreen({
       <p className="triviaBanner"></p>
       {/* 3 */}
       <div className="gameScreenSidebar">
-        <p className="banner">Click on a target in the image.</p>
+        <p className="banner">Click on a star in the image.</p>
         {!gameOver ? (
           <div className="gameScreenControls">
             {currentTile && (

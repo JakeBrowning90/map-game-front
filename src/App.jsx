@@ -43,31 +43,13 @@ function App() {
   const drawTileSet = () => {
     setTileSet((tileSet) => []);
     // Y axis (rows)
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 45; i++) {
       // X axis (columns)
-      for (let j = 0; j < 8; j++) {
-        setTileSet((tileSet) => [...tileSet, { key: `${j},${i}` }]);
+      for (let j = 0; j < 80; j++) {
+        setTileSet((tileSet) => [...tileSet, { key: `${i},${j}` }]);
       }
     }
   };
-
-  // useEffect(() => {
-  //   const getUsers = async () => {
-  //     let response = await fetch("http://localhost:3000/users");
-  //     let data = await response.json();
-  //     setUserData(data);
-  //   };
-  //   getUsers();
-  // }, [scoreboardActive]);
-
-  // useEffect(() => {
-  //   const getTargets = async () => {
-  //     let response = await fetch("http://localhost:3000/targets");
-  //     let data = await response.json();
-  //     setTargetData(data);
-  //   };
-  //   getTargets();
-  // }, [gameActive]);
 
   useEffect(() => {
     fetch("http://localhost:3000/users", { mode: "cors" })

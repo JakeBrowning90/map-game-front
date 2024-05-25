@@ -177,6 +177,7 @@ main {
   padding: 5px;
   border-radius: 5px;
 }
+
 #playerName {
   width: 100%;
 }
@@ -188,13 +189,13 @@ main {
   grid-row: 2 /-1;
   height: 100%;
   /* width: auto; */
-  background-image: url("./assets/whereswaldoFruit.jpeg");
-  /* background-image: url("./assets/map1.jpeg"); */
+  /* background-image: url("./assets/whereswaldoFruit.jpeg"); */
+  background-image: url("./assets/usMapBlue1.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   display: grid;
-  grid-template-rows: repeat(4, 1fr);
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(45, 1fr);
+  grid-template-columns: repeat(80, 1fr);
 }
 
 .gameTile {
