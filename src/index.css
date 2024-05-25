@@ -168,6 +168,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  padding: 2px;
   height: 100%;
   overflow: scroll;
 }
@@ -175,6 +176,19 @@ main {
 .cityList > * {
   border-radius: 5px;
   background-color: var(--americana-light-blue);
+  /* border-radius: 8px; */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  /* background-color: var(--americana-dark-red); */
+  color: white;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  text-justify: auto;
 }
 
 /* .gameStatus,

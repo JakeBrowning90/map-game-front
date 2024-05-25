@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import StartScreen from "./components/StartScreen";
 import GameScreen from "./components/GameScreen";
@@ -8,7 +7,6 @@ import Footer from "./components/Footer";
 // import TargetNamer from ".components/TargetNamer"
 
 function App() {
-  // const [count, setCount] = useState(0);
   const [userData, setUserData] = useState([]);
   const [targetData, setTargetData] = useState([]);
   const [tileSet, setTileSet] = useState([]);
@@ -33,11 +31,6 @@ function App() {
     setHomeActive(false);
     setGameActive(false);
     setScoreboardActive(true);
-  };
-
-  const abortGame = () => {
-    setGameActive(false);
-    setHomeActive(true);
   };
 
   const drawTileSet = () => {
@@ -100,7 +93,6 @@ function App() {
         )}
         {gameActive && (
           <GameScreen
-            abortGame={abortGame}
             navToHome={navToHome}
             navToScoreboard={navToScoreboard}
             targetData={targetData}

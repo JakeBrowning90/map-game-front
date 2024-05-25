@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import TargetNamer from "./TargetNamer";
 
 function GameScreen({
-  abortGame,
   navToHome,
   navToScoreboard,
   targetData,
@@ -11,7 +9,6 @@ function GameScreen({
   userToBeat,
 }) {
   const [currentTile, setCurrentTile] = useState();
-  // const [targetData, setTargetData] = useState([]);
   const [foundTiles, setFoundTiles] = useState([]);
   const [timer, setTimer] = useState(0);
   const [gameOver, setGameOver] = useState(false);
@@ -30,6 +27,31 @@ function GameScreen({
         resetBoard();
         updateBannerText();
       }
+    }
+  };
+
+  const checkMove = (e) => {
+    // console.log(e.target.id);
+    let target = targetData.find(({ name }) => name === e.target.id);
+    let random = Math.floor(Math.random() * target.trivia.length);
+    if (target.location.includes(currentTile)) {
+      updateBannerText(`Correct! You located ${e.target.id}.`);
+      updateTriviaText(`Fun fact: ${target.trivia[random]}`);
+      setFoundTiles([...foundTiles, currentTile]);
+      resetBoard();
+
+      const remainingTargets = targetData.filter(
+        (unfound) => unfound.id !== target.id
+      );
+      if (checkEndgame(remainingTargets)) {
+        setGameOver(true);
+      }
+      setTargetData(remainingTargets);
+    } else {
+      updateBannerText(`Sorry, try again!`);
+      // Penalty for mistake (Change this penalty system?)
+      setTimer((timer) => timer + 1001);
+      resetBoard();
     }
   };
 
@@ -102,33 +124,6 @@ function GameScreen({
     });
   };
 
-  function checkMove() {
-    const targetNamer = document.querySelector("#targetNamer");
-    let namedTarget = targetNamer.value;
-    let target = targetData.find(({ name }) => name === namedTarget);
-    let random = Math.floor(Math.random() * target.trivia.length);
-    if (target.location.includes(currentTile)) {
-      updateBannerText(`Correct! You located ${namedTarget}.`);
-      updateTriviaText(`Fun fact: ${target.trivia[random]}`);
-      setFoundTiles([...foundTiles, currentTile]);
-      resetBoard();
-      // TODO: Update score/list display
-
-      const remainingTargets = targetData.filter(
-        (unfound) => unfound.id !== target.id
-      );
-      if (checkEndgame(remainingTargets)) {
-        setGameOver(true);
-      }
-      setTargetData(remainingTargets);
-    } else {
-      updateBannerText(`Sorry, try again!`);
-      // Penalty for mistake (Change this penalty system?)
-      setTimer((timer) => timer + 1001);
-      resetBoard();
-    }
-  }
-
   //If NOT gameover, run timer
   useEffect(() => {
     if (!gameOver) {
@@ -164,7 +159,7 @@ function GameScreen({
               <ul className="cityList">
                 {targetData.map((target) => {
                   return (
-                    <li key={target.id} id={target.key}>
+                    <li key={target.id} id={target.name} onClick={checkMove}>
                       {target.name}
                     </li>
                   );
