@@ -127,25 +127,32 @@ main {
   /* width: 1200px; */
   display: grid;
   grid-template-columns: 200px 1000px;
-  grid-template-rows: 50px 1fr 50px;
+  grid-template-rows: 60px 1fr 50px;
   gap: 10px;
 }
 
-/* .gameScreen > * {
-  display: flex;
-  flex-direction: column;
-} */
-
 .gameStatus {
   background-color: var(--americana-dark-blue);
+  padding: 5px;
+  border-radius: 5px;
 }
 .triviaBanner {
   background-color: whitesmoke;
-  color: var(--americana-light-red)
+  color: var(--americana-light-red);
+  padding: 5px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1em;
+  font-style: italic;
+  font-weight: 700;
 }
 
 .gameScreenSidebar {
   background-color: var(--americana-dark-blue);
+  padding: 5px;
+  border-radius: 5px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -154,8 +161,11 @@ main {
 
 .banner {
   background-color: whitesmoke;
-  color: var(--americana-light-red)
-
+  color: var(--americana-light-red);
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  border-radius: 5px;
 }
 .gameScreenControls {
   background-color: var(--americana-light-blue);
@@ -173,14 +183,13 @@ main {
   overflow: scroll;
 }
 
-.cityList > * {
+.cityChoice {
   border-radius: 5px;
+  padding: 5px;
   background-color: var(--americana-light-blue);
-  /* border-radius: 8px; */
-
   display: flex;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center; */
+  /* align-items: center; */
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
@@ -191,51 +200,19 @@ main {
   text-justify: auto;
 }
 
-/* .gameStatus,
-.gameScreenSidebar {
-  background-color: var(--americana-dark-blue);
-} */
-/* .triviaBanner,
-.banner {
-  color: var(--americana-dark-red);
-  background-color: whitesmoke;
-} */
-
-/* .triviaBanner {
-  font-style: italic;
-  font-weight: bold;
-  font-size: 1.2em;
-} */
-
-/* .gameScreenControls,
-.endGameControls {
-  margin-bottom: auto;
-} */
-
-/* .gameScreenControls > *,
-.endGameControls > * {
-  background-color: var(--americana-light-blue);
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  border-radius: 5px;
-  max-height: 400px;
-  overflow: scroll;
-} */
+.cityChoice:hover {
+  background-color: #83b2cf;
+}
 
 #playerName {
   width: 100%;
 }
 .gameBoard {
-  /* box-sizing: border-box; */
   border: 2px solid var(--americana-light-red);
   /* aspect-ratio: 4/3; */
   grid-column: 2 /-1;
   grid-row: 2 /-1;
   width: 100%;
-  /* width: auto; */
-  /* background-image: url("./assets/whereswaldoFruit.jpeg"); */
   background-image: url("./assets/usMapBlue1.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;

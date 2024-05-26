@@ -33,10 +33,11 @@ function GameScreen({
   const checkMove = (e) => {
     // console.log(e.target.id);
     let target = targetData.find(({ name }) => name === e.target.id);
+    let splitName = target.name.split(', ')
     let random = Math.floor(Math.random() * target.trivia.length);
     if (target.location.includes(currentTile)) {
       updateBannerText(`Correct! You located ${e.target.id}.`);
-      updateTriviaText(`Fun fact: ${target.trivia[random]}`);
+      updateTriviaText(`${splitName[1]} fact: ${target.trivia[random]}`);
       setFoundTiles([...foundTiles, currentTile]);
       resetBoard();
 
@@ -79,7 +80,7 @@ function GameScreen({
   };
 
   const checkEndgame = (remaining) => {
-    if (remaining.length == 49) {
+    if (remaining.length == 0) {
       return true;
     } else {
       return false;
@@ -165,7 +166,7 @@ function GameScreen({
               <ul className="cityList">
                 {targetData.map((target) => {
                   return (
-                    <li key={target.id} id={target.name} onClick={checkMove}>
+                    <li key={target.id} id={target.name} className="cityChoice"onClick={checkMove}>
                       {target.name}
                     </li>
                   );
