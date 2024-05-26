@@ -45,7 +45,7 @@ function App() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:3000/users", { mode: "cors" })
+    fetch("https://wheres-waldo-back.fly.dev/users/", { mode: "cors" })
       .then((response) => {
         if (response.status >= 400) {
           throw new Error("user fetch error");
@@ -57,7 +57,7 @@ function App() {
   }, [scoreboardActive]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/targets", { mode: "cors" })
+    fetch("https://wheres-waldo-back.fly.dev/targets/", { mode: "cors" })
       .then((response) => {
         if (response.status >= 400) {
           throw new Error("user fetch error");

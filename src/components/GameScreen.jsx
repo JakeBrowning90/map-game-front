@@ -17,7 +17,7 @@ function GameScreen({
     if (!gameOver) {
       if (!currentTile) {
         setCurrentTile(e.target.id);
-        console.log(e.target.id);
+        // console.log(e.target.id);
         if (!e.target.id) {
           updateBannerText("You've already found something here!");
         } else {
@@ -108,7 +108,7 @@ function GameScreen({
       name = "Anonymous player";
     }
 
-    fetch("http://localhost:3000/users", {
+    fetch("https://wheres-waldo-back.fly.dev/users", {
       method: "POST",
       mode: "cors",
       headers: {
@@ -122,7 +122,7 @@ function GameScreen({
   };
 
   const deleteBeatenScore = () => {
-    fetch(`http://localhost:3000/users/${userToBeat.id}`, {
+    fetch(`https://wheres-waldo-back.fly.dev/${userToBeat.id}`, {
       mode: "cors",
       method: "DELETE",
       headers: {
