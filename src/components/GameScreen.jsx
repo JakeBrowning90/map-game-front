@@ -87,9 +87,15 @@ function GameScreen({
   };
 
   const updateScoreboard = () => {
-    addUserscore();
-    deleteBeatenScore();
-    navToScoreboard();
+    // addUserscore();
+    // deleteBeatenScore();
+    // navToScoreboard();
+
+    let promise1 = addUserscore();
+    let promise2 = deleteBeatenScore();
+    Promise.all([promise1, promise2]).then(() => {
+      navToScoreboard();
+    });
   };
 
   const addUserscore = () => {
