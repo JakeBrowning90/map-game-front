@@ -1,4 +1,4 @@
-# Map Game (Where's Waldo)
+# Map Game
 
 ## Overview
 
