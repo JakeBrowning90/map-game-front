@@ -80,7 +80,8 @@ main {
   margin: auto;
   width: 100%;
   padding: 10px;
-  overflow-x: scroll;
+  overflow-x: auto;
+  /* scrollbar-width: thin; */
 }
 
 .startScreen,
@@ -185,6 +186,7 @@ main {
   padding: 2px;
   height: 100%;
   overflow: scroll;
+  scrollbar-width: none;
 }
 
 .cityChoice {
@@ -225,6 +227,7 @@ main {
   grid-template-rows: repeat(45, 1fr);
   grid-template-columns: repeat(80, 1fr);
   overflow: scroll;
+  scrollbar-width: none;
 }
 
 .gameTile {
